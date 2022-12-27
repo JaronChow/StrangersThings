@@ -1,23 +1,50 @@
-import logo from './logo.svg';
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Route,
+} from "react-router-dom";
+import { useState } from "react";
 import './App.css';
+import NotFound from "./NotFound";
+import Register from "./Pages/Register";
+import Root from './Pages/Root';
+import Posts from "./Pages/Posts";
+import Login from "./Pages/Login";
+import Profile from "./Pages/Profile";
+import AddPost from "./Pages/CreatePosts"
 
 function App() {
+
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Root />,
+      errorElement: <NotFound />,
+      children:[ 
+        {
+          path:"posts",
+          element:<Posts />,
+        },
+        {
+          path:"profile",
+          element: <Profile />
+        },
+        {
+          path:"register",
+          element:<Register />
+        },
+        {
+          path:"login",
+          element:<Login />
+        },
+      ],
+    },
+
+  ]);
+// the colon: means this specific thing is a route parameter will render specific posts, gives it the functionality, takes database ID and shows the infomation
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <RouterProvider router={router} />
     </div>
   );
 }
