@@ -41,7 +41,7 @@ const Register  = () => {
             }else {
                 localStorage.setItem('token', response.data.token)
                 setToken(response.data.token) // calling set token dfined in root, and passed into context in outlet, if components needs token then it can be used
-            }
+                }
         }
         setUsername('');
         setPassword('');
